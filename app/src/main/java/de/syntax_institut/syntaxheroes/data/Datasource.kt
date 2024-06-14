@@ -4,8 +4,8 @@ import de.syntax_institut.syntaxheroes.data.model.MarvelCharacter
 
 class Datasource {
 
-    fun loadMarvelCharacters(): List<MarvelCharacter> {
-        return listOf(
+    fun loadMarvelCharacters(): MutableList<MarvelCharacter> {
+        return mutableListOf(
             MarvelCharacter("Spider-Man", "Peter Parker", false),
             MarvelCharacter("Iron Man", "Tony Stark", false),
             MarvelCharacter("Mephisto", "Unknown", true),
@@ -32,5 +32,15 @@ class Datasource {
             MarvelCharacter("Blade", "Eric Brooks", false),
             MarvelCharacter("Kang the Conqueror", "Unknown", true)
         )
+    }
+    fun loadMarvelHeroes(heroes: MutableList<MarvelCharacter>): MutableList<MarvelCharacter> {
+        var marvelHeroes = heroes
+        marvelHeroes = marvelHeroes.filter { !it.isVillain }.toMutableList()
+        return marvelHeroes
+    }
+    fun loadMarvelVillains(villains: MutableList<MarvelCharacter>): MutableList<MarvelCharacter> {
+        var marvelVillains = villains
+        marvelVillains = marvelVillains.filter { it.isVillain }.toMutableList()
+        return marvelVillains
     }
 }
