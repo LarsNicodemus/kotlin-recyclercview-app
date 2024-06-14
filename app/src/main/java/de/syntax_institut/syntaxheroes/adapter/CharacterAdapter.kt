@@ -10,7 +10,7 @@ import de.syntax_institut.syntaxheroes.databinding.HeroesListBinding
 import de.syntax_institut.syntaxheroes.databinding.VillainListBinding
 
 class CharacterAdapter(
-    private val marvelCharacter: MutableList<MarvelCharacter>,
+    private val marvelCharacter: List<MarvelCharacter>,
     private val context: Context
 ) : RecyclerView.Adapter<ViewHolder>() {
     private val hero = 1

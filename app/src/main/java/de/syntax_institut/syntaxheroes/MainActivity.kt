@@ -12,18 +12,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         vb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(vb.root)
-        vb.rvList.adapter = CharacterAdapter(Datasource().loadMarvelCharacters(),this)
+
+        val marvelCharacters = Datasource().loadMarvelCharacters()
+        val characterAdapter = CharacterAdapter(marvelCharacters,this)
+        vb.rvList.adapter = characterAdapter
+
+
+
 
         vb.btnAll.setOnClickListener {
-            vb.rvList.adapter = CharacterAdapter(Datasource().loadMarvelCharacters(),this)
+            vb.rvList.adapter = characterAdapter
         }
         vb.btnHeroes.setOnClickListener {
-
-            vb.rvList.adapter = CharacterAdapter(Datasource().loadMarvelHeroes(Datasource().loadMarvelCharacters()),this)
+            val heroList = Datasource().loadMarvelCharacters().filter { !it.isVillain }
+            val heroesAdapter = CharacterAdapter(heroList,this)
+            vb.rvList.adapter = heroesAdapter
         }
         vb.btnVillains.setOnClickListener {
-
-            vb.rvList.adapter = CharacterAdapter(Datasource().loadMarvelVillains(Datasource().loadMarvelCharacters()),this)
+            val villainList = Datasource().loadMarvelCharacters().filter { it.isVillain }
+            val villainsAdapter = CharacterAdapter(villainList,this)
+            vb.rvList.adapter = villainsAdapter
         }
     }
 }
